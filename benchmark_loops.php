@@ -17,21 +17,35 @@
  */
 
 
+// Verificando los argumentos.
+if (($argc > 2) and ((strcmp($argv[1], "-h")) or (strcmp($argv[1], "--help")))) {
+	
+  echo PHP_EOL;
+  echo 'Usage: php benchmark_loops.php [Num Iteraciones]';
+  echo PHP_EOL;
+  echo 'Ejecutar el BenchMark de Bucles.';
+  echo PHP_EOL;
+  exit();
+}
+
+
+$ITER = (isset($argv[1])) ? $argv[1] : 10000;
+
 
 /*
  *  Rellenando el array con 10000 elementos.
  */
 for($i = 0; $i < 10000; $i++) {
-	$elements[] = (string)rand(10000000, 99999999);
+  $elements[] = (string)rand(10000000, 99999999);
 }
 
 
 
 
 /***********************************************
- *	Bucle FOR incremental.
- *	Tamaño sin precalcular con antelación.
- *	Se calcula el tamaño por cada iteración.
+ *  Bucle FOR incremental.
+ *  Tamaño sin precalcular con antelación.
+ *  Se calcula el tamaño por cada iteración.
  */
 $time_start = microtime(true);
 
@@ -45,10 +59,10 @@ $for_inc_notpre = $time_end - $time_start;
 
 
 /***********************************************
- *	Bucle FOR incremental.
- *	Tamaño precalculado con antelación.
- *	Condición fija y no se ha de calcular
- *	por cada iteracion.
+ *  Bucle FOR incremental.
+ *  Tamaño precalculado con antelación.
+ *  Condición fija y no se ha de calcular
+ *  por cada iteracion.
  */
 $time_start = microtime(true);
 
@@ -63,9 +77,9 @@ $for_inc_tamprec = $time_end - $time_start;
 
 
 /***********************************************
- *	Bucle FOR decremental.
- *	Tamaño precalculado con antelación.
- *	Empieza desde el final hasta 0 incluido.
+ *  Bucle FOR decremental.
+ *  Tamaño precalculado con antelación.
+ *  Empieza desde el final hasta 0 incluido.
  */
 $time_start = microtime(true);
 
@@ -80,8 +94,8 @@ $for_dec = $time_end - $time_start;
 
 
 /***********************************************
- *	Bucle FOREACH.
- *	Toma cada elemento del array, sin
+ *  Bucle FOREACH.
+ *  Toma cada elemento del array, sin
  *  coger su valor, sólo la clave.
  *  No se requiere utilizar arrays
  *  asociativos en este test.
@@ -98,9 +112,8 @@ $foreach = $time_end - $time_start;
 
 
 /***********************************************
- *	Bucle WHILE incremental.
- *	Tamaño precalculado con antelación.
- *  
+ *  Bucle WHILE incremental.
+ *  Tamaño precalculado con antelación.
  */
 $time_start = microtime(true);
 
@@ -116,9 +129,8 @@ $while_inc = $time_end - $time_start;
 
 
 /***********************************************
- *	Bucle WHILE decremental.
- *	Tamaño precalculado con antelación.
- *  
+ *  Bucle WHILE decremental.
+ *  Tamaño precalculado con antelación.
  */
 $time_start = microtime(true);
 
@@ -133,7 +145,7 @@ $while_dec = $time_end - $time_start;
 
 
 /***********************************************
- *	RESULTADOS DEL BENCHMARK DE BUCLES.
+ *  RESULTADOS DEL BENCHMARK DE BUCLES.
  */
 echo '=========================================';
 echo PHP_EOL;
